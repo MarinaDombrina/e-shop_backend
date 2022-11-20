@@ -4,6 +4,7 @@ const {generateAccessToken} = require('../middlewares/jwt')
 
 const User = require('../models/User')
 const Role = require('../models/Role')
+const Basket = require('../models/Basket')
 
 class AuthController {
     async register(req, res) {
@@ -18,6 +19,7 @@ class AuthController {
 
             const hashPassword = bcrypt.hashSync(password, 7)
             const userRole = await Role.findOne({value: 'USER'})
+
             const user = new User({username, password: hashPassword, roles: [userRole.value]})
             await user.save();
 
@@ -50,7 +52,6 @@ class AuthController {
             res.status(400).json({message: 'Login error'})
         }
     }
-
 
     async getUsers(req, res) {
         try {

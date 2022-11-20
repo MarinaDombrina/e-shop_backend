@@ -15,6 +15,13 @@ const User = new Schema({
             type: String,
             ref: 'Role'
         }
+    ],
+    basket: [
+        {
+            type: String,
+            ref: 'Product',
+            default: undefined
+        }
     ]
 })
 
